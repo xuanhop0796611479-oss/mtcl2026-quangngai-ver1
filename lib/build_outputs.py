@@ -304,14 +304,12 @@ def extract_4g_zero(g4_xlsx, province=PROV):
         if ix['ngay'] is not None and not date_str:
             nv=cell(row,'ngay')
             if nv: date_str=str(nv).strip()
-        # TRAFFIC_4G = 0 (hoặc ô trống => coi như không có lưu lượng = 0)
+        # TRAFFIC_4G (MB) = 0 (ô trống => coi như không có lưu lượng = 0)
         if tr is None or tr==0:
-            nv_row=cell(row,'ngay')
             zero.append({
                 'cell':str(cellname).strip(),
                 'enb':str(cell(row,'enb')).strip() if cell(row,'enb') is not None else '',
                 'xa':str(cell(row,'xa')).strip() if cell(row,'xa') is not None else '',
-                'ngay':str(nv_row).strip() if nv_row is not None else '',
                 'traffic':0,
             })
     zero.sort(key=lambda x:x['cell'])
